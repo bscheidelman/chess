@@ -62,6 +62,7 @@ def potentialMoves(x,y):
             if obj.xcord == x:
                 objholder = obj
     if objholder == None:
+        print(123213)
         return False
     temp = {}
     for tick in range(8):
@@ -154,9 +155,9 @@ def startGame():
         viewBoard()
         tof = False
         while tof == False:
-            yc = input("Choose your Y Cord [0,7]")
-            xc = input("Choose your X cord [0,7]")
-            tof =  potentialMoves(yc,xc)
+            yc = int(input("Choose your Y Cord [0,7]"))
+            xc = int(input("Choose your X cord [0,7]"))
+            tof = potentialMoves(xc,yc)
         turn +=1 
 
 startGame()
