@@ -62,7 +62,6 @@ def potentialMoves(x,y):
             if obj.xcord == x:
                 objholder = obj
     if objholder == None:
-        print(123213)
         return False
     temp = {}
     for tick in range(8):
@@ -118,7 +117,6 @@ def potentialMoves(x,y):
 
     if pairs == []:
         return False
-    print(objholder.piece, objholder.color, objholder.ycord, objholder.xcord)
     for pair in pairs:
         temp[pair[1]][pair[2]] = pair[0]
     for key in temp:
@@ -141,6 +139,7 @@ def potentialMoves(x,y):
                     objholder.ycord = pair[1]
                     objholder.xcord = pair[2]
     return True
+
 def startGame():
     turn = 1
     playing = True
