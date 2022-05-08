@@ -53,6 +53,7 @@ def viewBoard():
         temp[obj.ycord][obj.xcord] = obj.piece
     for key in temp:
         print(temp[key])
+    print("")
 
 def potentialMoves(x,y):
     objholder = None
@@ -69,6 +70,7 @@ def potentialMoves(x,y):
             temp[tick].append('0')
     for obj in pli:
         temp[obj.ycord][obj.xcord] = obj.piece
+    pairs = []
     if temp[objholder.ycord][objholder.xcord] == '1':
         init = 97
         pairs = []
@@ -83,18 +85,18 @@ def potentialMoves(x,y):
             if objholder.ycord != 0:
                 for obj in pli:
                     if obj.ycord == objholder.ycord +1 and obj.xcord == objholder.xcord -1:
-                        if obj.color == "Black":
+                        if obj.color == "White":
                             pairs.append([chr(init),objholder.ycord+1,objholder.xcord+-1])
                             init += 1
             if objholder.ycord != 7:
                 for obj in pli:
                     if obj.ycord == objholder.ycord +1 and obj.xcord == objholder.xcord + 1:
-                        if obj.color == "Black":
+                        if obj.color == "White":
                             pairs.append([chr(init),objholder.ycord+1,objholder.xcord+1])
                             init += 1
         else:
             if temp[objholder.ycord - 1][objholder.xcord] == '0':
-                pairs.append([chr(init),objholder.ycord+1,objholder.xcord])
+                pairs.append([chr(init),objholder.ycord-1,objholder.xcord])
                 init += 1
             if objholder.ycord == 1:
                 if temp[objholder.ycord - 2][objholder.xcord] == '0':
@@ -115,6 +117,7 @@ def potentialMoves(x,y):
 
     if pairs == []:
         return False
+    print(objholder.piece, objholder.color, objholder.ycord, objholder.xcord)
     for pair in pairs:
         temp[pair[1]][pair[2]] = pair[0]
     for key in temp:
@@ -137,23 +140,23 @@ def potentialMoves(x,y):
                     objholder.ycord = pair[1]
                     objholder.xcord = pair[2]
     return True
+def startGame():
+    turn = 1
+    playing = True
+    while playing == True:
+        print(f'It is Turn {turn}')
+        if turn % 2 == 1:
+            player = "White"
+        else:
+            player = "Black"
+        print(f'{player}s Turn!')
+        print("The current board is:")
+        viewBoard()
+        tof = False
+        while tof == False:
+            yc = input("Choose your Y Cord [0,7]")
+            xc = input("Choose your X cord [0,7]")
+            tof =  potentialMoves(yc,xc)
+        turn +=1 
 
-
-turn = 1
-playing = True
-while playing == True:
-    print(f'It is Turn {turn}')
-    if turn % 2 == 1:
-        player = "White"
-    else:
-        player = "Black"
-    print(f'{player}s Turn!')
-    print("The current board is:")
-    viewBoard()
-    tof = False
-    while tof == False:
-        yc = input("Choose your Y Cord [0,7]")
-        xc = input("Choose your X cord [0,7]")
-        tof =  potentialMoves(yc,xc)
-    turn +=1 
-
+startGame()
